@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英単語学習サイト</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="header">
+        <canvas class="t_back"></canvas>
+        <div class="title"><img src="logo.png" id="logo"></div>
+        <span id="counter"></span>
+    </nav>
+    <main>
+        <div class="words_mode1"><button id="J_start_button">日本語訳</button></div>
+
+        <div class="Part_of_speech">
+            <div class="noun"><button id="noun_start_button">名詞(100)</button></div>
+            <div class="verb"><button id="verb_start_button">動詞(100)</button></div>
+            <div class="adjective"><button id="adjective_start_button">形容詞(100)</button></div>
+            <div class="adverb"><button id="adverb_start_button">副詞(100)</button></div>
+            <div class="pronoun"><button id="pronoun_start_button">代名詞(100)</button></div>
+            <div class="preposition"><button id="preposition_start_button">前置詞(100)</button></div>
+            <div class="conjunction"><button id="conjunction_start_button">接続詞(100)</button></div>
+            <div class="article"><button id="article_start_button">冠詞(100)</button></div>
+        </div>
+
+        <div id="quiz">
+            <div id="main_word"></div>
+            <div><button id="answer1"></button></div>
+            <div><button id="answer2"></button></div>
+            <div><button id="answer3"></button></div>
+            <div><button id="answer4"></button></div>
+        </div>
+        <div id="true">〇</div>
+        <div id="else">×</div>
+        <div id="true_text"></div>
+        <div id="next_text"><button id="next">次の問題</button></div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

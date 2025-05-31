@@ -1,0 +1,204 @@
+body {
+    background-color: antiquewhite;
+    margin: 0;
+    overflow: hidden;
+}
+
+.title {
+    text-align: center;
+    color: white;
+    position: relative;
+    bottom: 2vh;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#logo {
+    width: 200px;
+    height: 200px;
+    user-select: none;
+}
+
+#counter {
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    position: relative;
+    bottom: 16vh;
+    font-weight: bold;
+    color: white;
+}
+
+.t_back {
+    background-color: rgb(192, 106, 0);
+    padding-left: 100vh;
+    padding-right: 100vh;
+    position: absolute;
+    z-index: -1;
+}
+
+/*モード選択*/
+.words_mode1 {
+    text-align: center;
+    position: relative;
+    top: 10vh;
+}
+
+#J_start_button {
+    font-size: 40px;
+    font-weight: bold;
+    
+}
+
+/*品詞選びボタン*/
+.Part_of_speech{
+    position: relative;
+    top: 0vh;
+    font-size: 30px;
+    text-align: center;
+}
+
+#noun_start_button{
+    font-size: 30px;
+    font-weight: bold;
+    width: 300px;
+}
+
+#verb_start_button{
+    font-size: 30px;
+    font-weight: bold;
+    width: 300px;
+    margin-top: 2vh;
+}
+
+#adjective_start_button{
+    font-size: 30px;
+    font-weight: bold;
+    width: 300px;
+    margin-top: 2vh;
+}
+
+#adverb_start_button{
+    font-size: 30px;
+    font-weight: bold;
+    width: 300px;
+    margin-top: 2vh;
+}
+
+#pronoun_start_button{
+    font-size: 30px;
+    font-weight: bold;
+    width: 300px;
+    margin-top: 2vh;
+}
+
+#preposition_start_button{
+    font-size: 30px;
+    font-weight: bold;
+    width: 300px;
+    margin-top: 2vh;
+}
+
+#conjunction_start_button{
+    font-size: 30px;
+    font-weight: bold;
+    width: 300px;
+    margin-top: 2vh;
+}
+
+#article_start_button{
+    font-size: 30px;
+    font-weight: bold;
+    width: 300px;
+    margin-top: 2vh;
+}
+
+/*答えボタン*/
+#quiz {
+    display: grid;
+    place-items: center;
+    height: 50vh;
+    position: relative;
+    top: 0vh;
+}
+
+#main_word {
+    text-align: center;
+    margin-bottom: 0px;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+#answer1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#answer2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#answer3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#answer4 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/*答え処理関係*/
+#true {
+    font-size: 300px;
+    text-align: center;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    color: rgb(255, 0, 0);
+    position: relative;
+    bottom: 71vh;
+}
+
+#else {
+    font-size: 400px;
+    text-align: center;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    position: relative;
+    bottom: 72vh;
+    color: blue;
+}
+
+#true_text {
+    font-size: 40px;
+    text-align: center;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    position: relative;
+    bottom: 145vh;
+    color: rgb(124, 70, 0);
+    font-weight: bold;
+}
+
+
+#next_text {
+    text-align: center;
+}
+
+#next {
+    font-size: 40px;
+    height: 60px;
+    position: relative;
+    bottom: 190vh;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
