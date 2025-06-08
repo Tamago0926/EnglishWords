@@ -339,6 +339,7 @@ const article_J_words = ["一つの","一人の","その","いくつかの","ど
 ,"誰かの","みんなの"
 ];
 
+//いろいろボタン
 const quiz = document.getElementById("quiz");
 quiz.style.display = "none";
 const true_effect = document.getElementById("true");
@@ -349,8 +350,17 @@ const next_button = document.getElementById("next");
 next_button.style.display = "none";
 const true_text = document.getElementById("true_text");
 true_text.style.display = "none";
+const statistics = document.getElementById("statistics");
+statistics.style.display = "none";
+const back_button = document.getElementById("back_button");
+back_button.style.display = "none";
 const J_start_button = document.getElementById("J_start_button");
+const E_start_button = document.getElementById("E_start_button");
+const statistics_button = document.getElementById("statistics_button");
 const main_word = document.getElementById("main_word");
+const correct_ = document.getElementById("correct");
+const mistake_ = document.getElementById("mistake");
+const correct_ratio = document.getElementById("correct_ratio");
 
 //品詞選択ボタンの非表示&取り込み
 const noun_start_button = document.getElementById("noun_start_button");
@@ -361,16 +371,11 @@ const pronoun_start_button = document.getElementById("pronoun_start_button");
 const preposition_start_button = document.getElementById("preposition_start_button");
 const conjunction_start_button = document.getElementById("conjunction_start_button");
 const article_start_button = document.getElementById("article_start_button");
+const all_button = document.getElementById("all_start_button");
+const Part = document.getElementById("Part"); 
 
 function nones(){
-    noun_start_button.style.display = "none";
-    verb_start_button.style.display = "none";
-    adjective_start_button.style.display = "none";
-    adverb_start_button.style.display = "none";
-    pronoun_start_button.style.display = "none";
-    preposition_start_button.style.display = "none";
-    conjunction_start_button.style.display = "none";
-    article_start_button.style.display = "none";
+    Part.style.display = "none";
 };
 
 nones();
@@ -382,10 +387,23 @@ const a_3 = document.getElementById("answer3");
 const a_4 = document.getElementById("answer4");
 const counter = document.getElementById("counter");
 
-//回答数を記録
+//統計関係
+//回数を記録
 let count = 0;
 counter.innerHTML = `回答数:${count}`;
 let number_memory;
+
+//正誤を記録
+let correct_count = 0;
+let mistake_count = 0;
+
+correct_.innerHTML = `正解数:${correct_count}`;
+mistake_.innerHTML = `誤答数:${mistake_count}`;
+
+//正解確率
+let c_ratio = 0;
+
+correct_ratio.innerHTML = `正答率:${c_ratio}%`;
 
 //選ぶ際の関数
 function generateOptions(correct, allOptions) {
@@ -406,16 +424,107 @@ function generateOptions(correct, allOptions) {
 
 //モード変数
 let mode_type;
+let English_Japanese;
+let innertype;
 
+//モード英語種類
+function English(){
+    switch (mode_type){
+        case "noun":
+            innertype = noun_E_words[r_number];
+            break;
+        case "verb":
+            innertype = verb_E_words[r_number];
+            break;
+        case "adjective":
+            innertype = adjective_E_words[r_number];
+            break;
+        case "adverb":
+            innertype = adverb_E_words[r_number];
+            break;
+        case "pronoun":
+            innertype = pronoun_E_words[r_number];
+            break;
+        case "preposition":
+            innertype = preposition_E_words[r_number];
+            break;
+        case "conjunction":
+            innertype = conjunction_E_words[r_number];
+            break;
+        case "article":
+            innertype = article_E_words[r_number];
+            break;
+    };
+}
+
+function Japanese(){
+    switch (mode_type){
+        case "noun":
+            innertype = noun_J_words[r_number];
+            break;
+        case "verb":
+            innertype = verb_J_words[r_number];
+            break;
+        case "adjective":
+            innertype = adjective_J_words[r_number];
+            break;
+        case "adverb":
+            innertype = adverb_J_words[r_number];
+            break;
+        case "pronoun":
+            innertype = pronoun_J_words[r_number];
+            break;
+        case "preposition":
+            innertype = preposition_J_words[r_number];
+            break;
+        case "conjunction":
+            innertype = conjunction_J_words[r_number];
+            break;
+        case "article":
+            innertype = article_J_words[r_number];
+            break;
+    };
+}
+
+//日本語選択オプション
+let options;
+let r_number;
+
+function return_J_words(){
+    r_number = Math.floor(Math.random() * preposition_E_words.length);
+    number_memory = r_number;
+    English();
+    main_word.innerHTML = innertype;
+    Japanese();
+    const correct = innertype;
+
+    options = generateOptions(correct, preposition_J_words);
+    return options;
+}
+
+//英語選択オプション
+function return_E_words(){
+    r_number = Math.floor(Math.random() * preposition_J_words.length);
+    number_memory = r_number;
+    Japanese();
+    main_word.innerHTML = innertype;
+    English();
+    const correct = innertype;
+
+    options = generateOptions(correct, preposition_E_words);
+    return options;
+}
+
+//問題表示処理(名詞)
 function r_noun() {
+    quiz_open();
     mode_type = "noun";
 
-    let r_number = Math.floor(Math.random() * noun_E_words.length);
-    number_memory = r_number;
-    main_word.innerHTML = noun_E_words[r_number];
-    const correct = noun_J_words[r_number];
-
-    const options = generateOptions(correct, noun_J_words);
+    if(English_Japanese =="Japanese"){
+        return_J_words();
+    }else {
+        return_E_words();
+    }
 
     a_1.innerHTML = options[0];
     a_2.innerHTML = options[1];
@@ -424,18 +533,19 @@ function r_noun() {
 
     nones();
     quiz.style.display = "";
+    statistics_button.style.display = "none";
 }
 
 //問題表示処理(動詞)
 function r_verb() {
+    quiz_open();
     mode_type = "verb";
 
-    let r_number = Math.floor(Math.random() * verb_E_words.length);
-    number_memory = r_number;
-    main_word.innerHTML = verb_E_words[r_number];
-    const correct = verb_J_words[r_number];
-
-    const options = generateOptions(correct, verb_J_words);
+    if(English_Japanese =="Japanese"){
+        return_J_words();
+    }else {
+        return_E_words();
+    }
 
     a_1.innerHTML = options[0];
     a_2.innerHTML = options[1];
@@ -444,18 +554,19 @@ function r_verb() {
 
     nones();
     quiz.style.display = "";
+    statistics_button.style.display = "none";
 }
 
 //問題表示処理(形容詞)
 function r_adjective() {
+    quiz_open();
     mode_type = "adjective";
 
-    let r_number = Math.floor(Math.random() * adjective_E_words.length);
-    number_memory = r_number;
-    main_word.innerHTML = adjective_E_words[r_number];
-    const correct = adjective_J_words[r_number];
-
-    const options = generateOptions(correct, adjective_J_words);
+    if(English_Japanese =="Japanese"){
+        return_J_words();
+    }else {
+        return_E_words();
+    }
 
     a_1.innerHTML = options[0];
     a_2.innerHTML = options[1];
@@ -464,18 +575,19 @@ function r_adjective() {
 
     nones();
     quiz.style.display = "";
+    statistics_button.style.display = "none";
 }
 
 //問題表示処理(副詞)
 function r_adverb() {
+    quiz_open();
     mode_type = "adverb";
 
-    let r_number = Math.floor(Math.random() * adverb_E_words.length);
-    number_memory = r_number;
-    main_word.innerHTML = adverb_E_words[r_number];
-    const correct = adverb_J_words[r_number];
-
-    const options = generateOptions(correct, adverb_J_words);
+    if(English_Japanese =="Japanese"){
+        return_J_words();
+    }else {
+        return_E_words();
+    }
 
     a_1.innerHTML = options[0];
     a_2.innerHTML = options[1];
@@ -484,19 +596,20 @@ function r_adverb() {
 
     nones();
     quiz.style.display = "";
+    statistics_button.style.display = "none";
 }
 
 
 //問題表示処理(代名詞)
 function r_pronoun() {
+    quiz_open();
     mode_type = "pronoun";
 
-    let r_number = Math.floor(Math.random() * pronoun_E_words.length);
-    number_memory = r_number;
-    main_word.innerHTML = pronoun_E_words[r_number];
-    const correct = pronoun_J_words[r_number];
-
-    const options = generateOptions(correct, pronoun_J_words);
+    if(English_Japanese =="Japanese"){
+        return_J_words();
+    }else {
+        return_E_words();
+    }
 
     a_1.innerHTML = options[0];
     a_2.innerHTML = options[1];
@@ -505,18 +618,19 @@ function r_pronoun() {
 
     nones();
     quiz.style.display = "";
+    statistics_button.style.display = "none";
 }
 
 //問題表示処理(前置詞)
 function r_preposition() {
+    quiz_open();
     mode_type = "preposition";
 
-    let r_number = Math.floor(Math.random() * preposition_E_words.length);
-    number_memory = r_number;
-    main_word.innerHTML = preposition_E_words[r_number];
-    const correct = preposition_J_words[r_number];
-
-    const options = generateOptions(correct, preposition_J_words);
+    if(English_Japanese =="Japanese"){
+        return_J_words();
+    }else {
+        return_E_words();
+    }
 
     a_1.innerHTML = options[0];
     a_2.innerHTML = options[1];
@@ -525,18 +639,19 @@ function r_preposition() {
 
     nones();
     quiz.style.display = "";
+    statistics_button.style.display = "none";
 }
 
 //問題表示処理(接続詞)
 function r_conjunction() {
+    quiz_open();
     mode_type = "conjunction";
 
-    let r_number = Math.floor(Math.random() * conjunction_E_words.length);
-    number_memory = r_number;
-    main_word.innerHTML = conjunction_E_words[r_number];
-    const correct = conjunction_J_words[r_number];
-
-    const options = generateOptions(correct, conjunction_J_words);
+    if(English_Japanese =="Japanese"){
+        return_J_words();
+    }else {
+        return_E_words();
+    }
 
     a_1.innerHTML = options[0];
     a_2.innerHTML = options[1];
@@ -545,18 +660,19 @@ function r_conjunction() {
 
     nones();
     quiz.style.display = "";
+    statistics_button.style.display = "none";
 }
 
 //問題表示処理(冠詞)
 function r_article() {
+    quiz_open();
     mode_type = "article";
 
-    let r_number = Math.floor(Math.random() * article_E_words.length);
-    number_memory = r_number;
-    main_word.innerHTML = article_E_words[r_number];
-    const correct = article_J_words[r_number];
-
-    const options = generateOptions(correct, article_J_words);
+    if(English_Japanese =="Japanese"){
+        return_J_words();
+    }else {
+        return_E_words();
+    }
 
     a_1.innerHTML = options[0];
     a_2.innerHTML = options[1];
@@ -565,10 +681,21 @@ function r_article() {
 
     nones();
     quiz.style.display = "";
+    statistics_button.style.display = "none";
 }
 
+//問題表示style.display = "";
+function quiz_open(){
+    a_1.style.display = "";
+    a_2.style.display = "";
+    a_3.style.display = "";
+    a_4.style.display = "";
+    quiz.style.display = "";
+    main_word.style.display = "";
+};
+
 //正誤処理
-const wordMap = {
+const wordMap1 = {
     verb: verb_J_words,
     noun: noun_J_words,
     adjective: adjective_J_words,
@@ -578,19 +705,39 @@ const wordMap = {
     conjunction: conjunction_J_words,
     article: article_J_words,
   };
+
+  const wordMap2 = {
+    verb: verb_E_words,
+    noun: noun_E_words,
+    adjective: adjective_E_words,
+    adverb: adverb_E_words,
+    pronoun: pronoun_E_words,
+    preposition: preposition_E_words,
+    conjunction: conjunction_E_words,
+    article: article_E_words,
+  };
   
   function checkAnswer(button) {
-    const correctWord = wordMap[mode_type] ? wordMap[mode_type][number_memory] : null;
-    if (button.textContent === correctWord) {
-      true_open();
-    } else {
-      else_open();
+    if(English_Japanese == "Japanese"){
+        const correctWord = wordMap1[mode_type] ? wordMap1[mode_type][number_memory] : null;
+        if (button.textContent === correctWord) {
+            true_open();
+        } else {
+            else_open();
+        }
+    }else {
+        const correctWord = wordMap2[mode_type] ? wordMap2[mode_type][number_memory] : null;
+        if (button.textContent === correctWord) {
+            true_open();
+        } else {
+            else_open();
+        }
     }
   }
 
 //正解表示用
 
-function answer_text(){
+function E_answer_text(){
     const wordMap = {
       verb: verb_J_words,
       noun: noun_J_words,
@@ -606,15 +753,39 @@ function answer_text(){
       true_text.innerHTML = `正解:${wordMap[mode_type][number_memory]}`;
     }
   }
+
+  function J_answer_text(){
+    const wordMap = {
+      verb: verb_E_words,
+      noun: noun_E_words,
+      adjective: adjective_E_words,
+      adverb: adverb_E_words,
+      pronoun: pronoun_E_words,
+      preposition: preposition_E_words,
+      conjunction: conjunction_E_words,
+      article: article_E_words,
+    };
+  
+    if(wordMap[mode_type]){
+      true_text.innerHTML = `正解:${wordMap[mode_type][number_memory]}`;
+    }
+  }
   
 //正解パターン
 function true_open(){
     true_text.style.display = "";
     true_effect.style.display = "";
     next_button.style.display  = "";
-    answer_text();
+
+    if(English_Japanese == "Japanese"){
+        E_answer_text();
+    }else {
+        J_answer_text();
+    }
+
     count++;
     counter.innerHTML = `回答数:${count}`;
+    correct_count++;
 };
 
 //誤答パターン
@@ -622,9 +793,16 @@ function else_open(){
     true_text.style.display = "";
     else_effect.style.display = "";
     next_button.style.display  = "";
-    answer_text();
+
+    if(English_Japanese == "Japanese"){
+        E_answer_text();
+    }else {
+        J_answer_text();
+    }
+
     count++;
     counter.innerHTML = `回答数:${count}`;
+    mistake_count++;
 };
 
 //次の問題へ移行
@@ -664,21 +842,63 @@ function next_button_click(){
 };
 
 //品詞選択ボタンの表示
-function J_button_views(){
-    noun_start_button.style.display = "";
-    verb_start_button.style.display = "";
-    adjective_start_button.style.display = "";
-    adverb_start_button.style.display = "";
-    pronoun_start_button.style.display = "";
-    preposition_start_button.style.display = "";
-    conjunction_start_button.style.display = "";
-    article_start_button.style.display = "";
-
-    J_start_button.style.display = "none";
+function button_views(){
+    Part.style.display = "";
+    back_button.style.display = "";
 }
+
+function J_button_views(){
+    button_views();
+    English_Japanese = "Japanese";
+}
+
+function E_button_views(){
+    button_views();
+    English_Japanese = "English";
+}
+
+//メニューに戻る
+function back_menu(){
+    Part.style.display = "none";
+    a_1.style.display = "none";
+    a_2.style.display = "none";
+    a_3.style.display = "none";
+    a_4.style.display = "none";
+    quiz.style.display = "none";
+    main_word.style.display = "none";
+    true_effect.style.display = "none";
+    else_effect.style.display = "none";
+    true_text.style.display = "none";
+    next_button.style.display = "none";
+    statistics.style.display = "none";
+    back_button.style.display = "none";
+
+    J_start_button.style.display = "";
+    E_start_button.style.display = "";
+    statistics_button.style.display = "";
+};
+
+//統計表示
+function s_open(){
+    J_start_button.style.display = "none";
+    E_start_button.style.display = "none";
+    statistics_button.style.display ="none";
+
+    statistics.style.display = "";
+    back_button.style.display ="";
+
+    let ct = correct_count / count;
+    c_ratio = Math.floor(ct * 100);
+
+    correct_.innerHTML = `正解数:${correct_count}`;
+    mistake_.innerHTML = `誤答数:${mistake_count}`;
+    correct_ratio.innerHTML = `正答率:${c_ratio}%`;
+};
 
 //クリック操作
 J_start_button.onclick = J_button_views;
+E_start_button.onclick = E_button_views;
+statistics_button.onclick = s_open;
 verb_start_button.onclick = r_verb;
 noun_start_button.onclick = r_noun;
 adjective_start_button.onclick = r_adjective;
@@ -692,7 +912,7 @@ a_2.onclick = () => checkAnswer(a_2);
 a_3.onclick = () => checkAnswer(a_3);
 a_4.onclick = () => checkAnswer(a_4);
 next_button.onclick = next_button_click;
-
+back_button.onclick = back_menu;
 
 
 
