@@ -1,5 +1,5 @@
 body {
-    background-color: antiquewhite;
+    background-color: rgb(255, 255, 255);
     margin: 0;
     overflow: hidden;
 }
@@ -19,19 +19,21 @@ body {
     user-select: none;
 }
 
-#counter {
-    font-size: 20px;
+#back_menu {
     display: flex;
     justify-content: flex-end;
-    margin-right: 20px;
     position: relative;
+    right: 20px;
     bottom: 16vh;
+}
+
+#back_button {
+    font-size: 20px;
     font-weight: bold;
-    color: white;
 }
 
 .t_back {
-    background-color: rgb(192, 106, 0);
+    background-color: rgb(0, 147, 192);
     padding-left: 100vh;
     padding-right: 100vh;
     position: absolute;
@@ -40,77 +42,146 @@ body {
 
 /*モード選択*/
 .words_mode1 {
-    text-align: center;
-    position: relative;
-    top: 10vh;
+    position: absolute;
+    bottom: 18.5vh;
+    left: 30%;
 }
 
 #J_start_button {
+    position: fixed;
+    top: 5vh;
+    font-size: 35px;
+    background-color: rgb(0, 147, 192);
+    border: 2px solid white;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#J_start_button:hover {
+    font-size: 35px;
+    background-color: rgb(93, 164, 185);
+    border: 2px solid white;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.words_mode2 {
+    position: fixed;
+    bottom: 25vh;
+    left: 60%;
+}
+
+#E_start_button {
+    position: fixed;
+    top: 5vh;
+    font-size: 35px;
+    background-color: rgb(0, 147, 192);
+    border: 2px solid white;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#E_start_button:hover {
+    font-size: 35px;
+    background-color: rgb(81, 158, 182);
+    border: 2px solid white;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.statistics_open {
+    text-align: center;
+    position: relative;
+    top: 20vh;
+}
+
+#statistics_button {
     font-size: 40px;
     font-weight: bold;
-    
 }
 
 /*品詞選びボタン*/
 .Part_of_speech{
     position: relative;
-    top: 0vh;
+    bottom: 0vh;
     font-size: 30px;
     text-align: center;
+    background-color: rgb(0, 147, 192);
+    padding: 50px;
 }
 
 #noun_start_button{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    width: 300px;
+    width: 200px;
+    height: 50px;
 }
 
 #verb_start_button{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    width: 300px;
+    width: 200px;
+    height: 50px;
     margin-top: 2vh;
 }
 
 #adjective_start_button{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    width: 300px;
+    width: 200px;
+    height: 50px;
     margin-top: 2vh;
 }
 
 #adverb_start_button{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    width: 300px;
+    width: 200px;
+    height: 50px;
     margin-top: 2vh;
 }
 
 #pronoun_start_button{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    width: 300px;
+    width: 200px;
+    height: 50px;
     margin-top: 2vh;
 }
 
 #preposition_start_button{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    width: 300px;
+    width: 200px;
+    height: 50px;
     margin-top: 2vh;
 }
 
 #conjunction_start_button{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    width: 300px;
+    width: 200px;
+    height: 50px;
     margin-top: 2vh;
 }
 
 #article_start_button{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    width: 300px;
+    width: 200px;
+    height: 50px;
+    margin-top: 2vh;
+}
+
+#all_start_button{
+    font-size: 25px;
+    font-weight: bold;
+    width: 200px;
+    height: 50px;
     margin-top: 2vh;
 }
 
@@ -200,5 +271,37 @@ body {
     position: relative;
     bottom: 190vh;
     color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+#counter {
+    font-size: 30px;
+    text-align: center;
+    position: relative;
+    top: 10vh;
+    font-weight: bold;
+}
+
+#correct {
+    font-size: 30px;
+    text-align: center;
+    position: relative;
+    top: 15vh;
+    font-weight: bold;
+}
+
+#mistake {
+    font-size: 30px;
+    text-align: center;
+    position: relative;
+    top: 20vh;
+    font-weight: bold;
+}
+
+#correct_ratio {
+    font-size: 30px;
+    text-align: center;
+    position: relative;
+    top: 25vh;
     font-weight: bold;
 }
