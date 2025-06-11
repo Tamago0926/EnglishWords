@@ -907,14 +907,14 @@ function s_open(){
 };
 
 //ヘッダー操作
-document.addEventListener("mousedown", function(event) {
+/*document.addEventListener("mousedown", function(event) {
     var button = document.getElementById("Part");
 
     if (!button.contains(event.target)) {
         Part.style.display = "none";
         back_menu();
     }
-});
+});*/
 
 
 //クリック操作
