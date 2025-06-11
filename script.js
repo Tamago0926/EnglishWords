@@ -912,6 +912,7 @@ document.addEventListener("mousedown", function(event) {
 
     if (!button.contains(event.target)) {
         Part.style.display = "none";
+        back_menu();
     }
 });
 
