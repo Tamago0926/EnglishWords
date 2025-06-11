@@ -361,6 +361,8 @@ const main_word = document.getElementById("main_word");
 const correct_ = document.getElementById("correct");
 const mistake_ = document.getElementById("mistake");
 const correct_ratio = document.getElementById("correct_ratio");
+const title_J = document.getElementById("title1");
+const title_E = document.getElementById("title2");
 
 //品詞選択ボタンの非表示&取り込み
 const noun_start_button = document.getElementById("noun_start_button");
@@ -692,6 +694,10 @@ function quiz_open(){
     a_4.style.display = "";
     quiz.style.display = "";
     main_word.style.display = "";
+    back_button.style.display = "";
+    
+    J_start_button.style.display = "none";
+    E_start_button.style.display = "none";
 };
 
 //正誤処理
@@ -844,7 +850,10 @@ function next_button_click(){
 //品詞選択ボタンの表示
 function button_views(){
     Part.style.display = "";
-    back_button.style.display = "";
+
+    statistics_button.style.display = "none";
+    title_E.style.display = "none";
+    title_J.style.display = "none";
 }
 
 function J_button_views(){
@@ -876,6 +885,8 @@ function back_menu(){
     J_start_button.style.display = "";
     E_start_button.style.display = "";
     statistics_button.style.display = "";
+    title_E.style.display = "";
+    title_J.style.display = "";
 };
 
 //統計表示
@@ -895,6 +906,16 @@ function s_open(){
     correct_ratio.innerHTML = `正答率:${c_ratio}%`;
 };
 
+//ヘッダー操作
+document.addEventListener("mousedown", function(event) {
+    var button = document.getElementById("Part");
+
+    if (!button.contains(event.target)) {
+        Part.style.display = "none";
+    }
+});
+
+
 //クリック操作
 J_start_button.onclick = J_button_views;
 E_start_button.onclick = E_button_views;
@@ -913,8 +934,3 @@ a_3.onclick = () => checkAnswer(a_3);
 a_4.onclick = () => checkAnswer(a_4);
 next_button.onclick = next_button_click;
 back_button.onclick = back_menu;
-
-
-
-
-
